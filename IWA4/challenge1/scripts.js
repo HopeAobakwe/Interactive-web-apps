@@ -7,27 +7,24 @@ if (date) {
 	console.log('March', 'Human Rights Day')
 	console.log('April', 'Family Day')
 	console.log('April', 'Freedom Day')
-	count = count + 4
+	count += 4;
 
-	if (status == 'student') {
+	if (Status === 'student') {
 	  console.log('June', 'Youth Day')
-	  count = count + 1
+	  count += 1;
   }
 
 	console.log('August', 'Women’s Day')
 	console.log('September', 'Heritage Day')
 	console.log('December', 'Day of Reconciliation')
-	count = count + 3
-
-	if (status = 'parent') {
+	count+= 3;
+	if (Status === 'parent') {
 	  console.log('December', 'Christmas Day')
-		count = count + 1
-  
-
-	console.log('December', 'Day of Goodwill')
-	count = count + 1
+		count += 1;
+    }
+    console.log('December', 'Day of Goodwill')
+	count += 1;
 }
-}
-console.log('Your status is:', status)
+console.log('Your status is:', Status)
 console.log('The year is:', date)
 console.log('The total holidays is:', count)
