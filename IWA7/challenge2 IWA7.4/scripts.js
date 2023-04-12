@@ -9,4 +9,4 @@ if (nickname) {
     console.log("Good Morning!");
   }
   /*the code was not running because they didn't use template laterals, and we need "if/else" 
-  statements to explain the comditions*/
+  statements to explain the conditions*/

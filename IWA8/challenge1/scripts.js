@@ -39,3 +39,10 @@ const sarah = {
 
 console.log(leo, leo.address['postal-code']);
 console.log(sarah, sarah.address['postal-code']);
+
+//Added semicolons to the end of each variable declaration
+//Added colons to separate keys and values in object literals
+//Added quotation marks around the postal-code property name in object literals
+//Added spaces to concatenate the name and surname strings with a space in between
+//Added a closing curly brace to each object literal
+//Accessed the postal-code property correctly using bracket notation with quotes around the property name, since it contains a hyphen.
