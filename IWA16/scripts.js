@@ -66,55 +66,66 @@ const MONTHS = [
   };
   
   // Only edit below this comment
+
+  /*destructuring assignment in the createHtml 
+  function that extracts the firstName, surname, id, and 
+  races properties from the athlete object,*/
+
+
  //nwabisa//
-let Athlete  = data.response.data.NM372.firstName +' '+ data.response.data.NM372.surname
-let races = Object.keys(data.response.data.NM372.races).length
-let day = new Date(data.response.data.NM372.races[1].date).getDate() +' '+ MONTHS[11] +' '+ new Date(data.response.data.NM372.races[1].date).getFullYear()
-console.log(day)
-let timeAsArray = data.response.data.NM372.races[1].time[0] + data.response.data.NM372.races[1].time[1] + data.response.data.NM372.races[1].time[2] + data.response.data.NM372.races[1].time[3]
-timeAsArray = '00:'+ timeAsArray
-// schalk//
-const athleteSchalk = data.response.data.SV782.firstName +' '+ data.response.data.SV782.surname
-let racesSchalk = Object.keys(data.response.data.SV782.races).length
-let daySchalk = new Date(data.response.data.SV782.races.at(-1).date).getDate() +' '+ MONTHS[11] +' '+ new Date(data.response.data.NM372.races.at(-1).date).getFullYear()
-let timeAsArraySchalk = data.response.data.SV782.races[1].time[0] + data.response.data.SV782.races[1].time[1] + data.response.data.SV782.races[1].time[2] + data.response.data.SV782.races[1].time[3]
-timeAsArraySchalk = '00:'+ timeAsArraySchalk
-//OUTPUT//
-const element = document.querySelector("body");
-const fragment = document.createDocumentFragment('dl');
-const athlete = [
-  [ 'Athlete:' +' '+ Athlete,"Total Races: "+ races, 'Event Date : ' + day, 'Total Time: ' + timeAsArray],
-  [ 'Athlete:' +' '+ athleteSchalk,"Total Races: "+ racesSchalk, 'Event Date : ' + daySchalk, 'Total Time: ' + timeAsArraySchalk],
-]
-let nwabisa = athlete[0]
-let schalk = athlete[1]
-for (let i = 0; i < 3; i = i + 1){
-  if (i < 1){
-    let title = document.createElement("h2");
-    title.textContent = data.response.data.NM372.id;
-    const dl = document.querySelector('body');
-    dl.appendChild(title);
-    nwabisa.forEach((athletes) => {
-      const details = document.createElement("dd");
-      details.textContent = athletes;
-      fragment.appendChild(details);
-       });
-       element.appendChild(fragment);
-    } else if ( i > 1 ){
-       let titleSchalk = document.createElement("h2");
-      titleSchalk.textContent = data.response.data.SV782.id;
-      const dd = document.querySelector('body');
-      dd.appendChild(titleSchalk);
-      schalk.forEach((athletes) => {
-      const details = document.createElement("dd");
-      details.textContent = athletes;
-      fragment.appendChild(details);
-       });
-       element.appendChild(fragment);
-    }
-   }
+ const createHtml = (athlete) => {
+    const {firstName, surname, id, races} = athlete;
+    const [latestRace] = races.slice(-1); //the slice method is used to get the latest race by extracting the last element of the races array
+    const {date, time} = latestRace;
+  
+    const fragment = document.createDocumentFragment();
+  
+    const title = document.createElement("h2"); //made h2 to be a string
+    title.textContent= id; //Added the textContent
+    fragment.appendChild(title);
+  
+    const list = document.createElement("dl");
+    const raceCount = races.length;
+  
+    const day = new Date (date).getDate();
+    const month = MONTHS[new Date (date).getMonth()];
+    const year = new Date (date).getFullYear();
 
+    /*createHtml function is called for each athlete using the Object.values method to get an array of the data 
+    object's values, and the forEach method to iterate
+     over that array and call the createHtml function for each athlete
+     (i have called out each athlete using using the object method) */
+  
+    const [first, second, third, fourth] = time;
+    const total = first + second + third + fourth;
+  
+    const hours = Math.floor(total / 60);
+    const minutes = total % 60;
+  
+    list.innerHTML = /* html */ `
+      <dt>Athlete</dt>
+      <dd>${firstName} ${surname}</dd>
+  
+      <dt>Total Races</dt>
+      <dd>${raceCount}</dd>
+  
+      <dt>Event Date (Latest)</dt>
+      <dd>${day} ${month} ${year}</dd>
+  
+      <dt>Total Time (Latest)</dt>
+      <dd>${hours.toString().padStart(2,"0")}:${minutes.toString().padStart(2,"0")}</dd> 
+    `;
+    /* the template literal string used to create the HTML
+     includes expressions to format the date and time data in
+      a more syntax appropriate way, using the padStart (the syntax was inccorrect in the initial code)*/
+  
+    fragment.appendChild(list);
+    return fragment;
+  };
+  const {NM372, SV782} = data.response.data; /*[NM372], [SV782] = data*/
 
+  document.querySelector("[data-athlete='NM372']").appendChild(createHtml(NM372));
+  document.querySelector("[data-athlete='SV782']").appendChild(createHtml(SV782));
 
 
 
