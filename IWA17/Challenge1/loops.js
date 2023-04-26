@@ -1,3 +1,19 @@
+// scripts.js
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+const getDaysInMonth = (date) => new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
 const createArray = (length) => {
     const result = [];
     for (let i = 0; i < length; i++) {
