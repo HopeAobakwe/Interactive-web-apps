@@ -17,10 +17,13 @@ This is a order Tracking system/order tracking app which is refferd to as Kitche
     - [Updating an Order:](#updating-an-order)
     - [Changing Order Status:](#changing-order-status)
 ## Features
+
 -Simple and user-friendly
 -Focus on minimal functionality
 -ability to add, edit, delete and track your order
+
 ## Requirements
+
 The following is required:
 -An IDE like [Visual Studio Code](https://code.visualstudio.com/)
 -Basic [HTML, CSS and JavaScript skills](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
